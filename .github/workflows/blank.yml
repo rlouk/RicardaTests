@@ -6,6 +6,18 @@ name: Ricardas Test Workflow
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: release version
+        required: true
+      deployTo:
+        type: choice
+        description: The environment you are deploying to
+        options:
+          - "f32-integ-windows"
+          - "f28-prod-windows"
+          - "f32-prod-windows"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

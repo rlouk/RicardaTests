@@ -1,0 +1,151 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Ricardas Test Workflow
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contain jobs - site_preval,site_stage,site_preprb,site_contain,site_deploy,site_postval,site_rb,site_uncontain,site_log,site_notify
+  site_preval:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run pre-validate
+      - name: Run pre-validate
+        run: |
+          echo "Begin pre-validate"
+  site_stage:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_preval
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run pre-validate
+      - name: Run stage-file
+        run: |
+          echo "Begin stage-file"
+  site_preprb:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_stage
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run backup
+      - name: Run backup
+        run: |
+          echo "Begin backup"
+  site_contain:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_preprb
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run contain
+      - name: Run contain
+        run: |
+         echo "Begin contain"
+  site_deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_contain
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run deploy
+      - name: Run deploy
+        run: |
+          echo "Begin deploy"
+  site_postval:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_deploy
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run post-validate - health-check
+      - name: Run post-validate - health-check
+        run: |
+          echo "Begin post-validate - health-check"
+  site_rb:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_deploy
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run rollback
+      - name: Run rollback
+        run: |
+          echo "Begin rollback"
+  site_uncontain:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_contain
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run uncontain
+      - name: Run uncontain
+        run: |
+          echo "Begin uncontain"
+  site_log:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_preval
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run log-result
+      - name: Run log-result
+        run: |
+          echo "Begin log-result"
+  site_notify:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: site_preval
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run notify
+      - name: Run log-result
+        run: |
+          echo "Begin notify"

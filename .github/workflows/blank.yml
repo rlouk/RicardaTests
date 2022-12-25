@@ -35,6 +35,7 @@ jobs:
       - name: Run pre-validate
         run: |
           echo "Begin pre-validate"
+          echo "Deploy version ${{ github.event.inouts.version }} to ${{ github.event.inputs.deployTo }}"
   site_stage:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
